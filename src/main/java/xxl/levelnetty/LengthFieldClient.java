@@ -12,6 +12,7 @@ import java.nio.ByteOrder;
 
 public class LengthFieldClient {
     public static void main(String[] args) throws InterruptedException {
+        String[] keys = new String[]{};
         final String host = "192.168.24.101";
         final int port = 9000;
         final NioEventLoopGroup group = new NioEventLoopGroup();
@@ -50,6 +51,7 @@ public class LengthFieldClient {
                             @Override
                             public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
                                 super.exceptionCaught(ctx, cause);
+                                System.err.println("error:" + cause.getMessage());
                             }
 
                             @Override
