@@ -1,15 +1,43 @@
 plugins {
     id 'java'
+    id 'groovy'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'com.bmuschko.nexus' version '2.3.1'
 }
 
 group 'xxl.levelnetty'
 version '1.0-SNAPSHOT'
 
+sourceCompatibility = "8"
+targetCompatibility = "8"
+
 repositories {
     mavenCentral()
+    maven {
+        url 'http://localhost:8081/repository/maven-snapshots/'
+        credentials {
+            username 'xxl'
+            password 'civic'
+        }
+    }
 }
 
 dependencies {
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
     implementation group: 'io.netty', name: 'netty-all', version: '4.1.50.Final'
+    //just use in test to study grammar
+    testImplementation 'org.codehaus.groovy:groovy-all:3.0.4'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+shadowJar {
+    zip64 true
+    manifest {
+        attributes(['Main-Class': 'xxl.levelnetty.LengthFieldClient'])
+    }
+}
+
+nexus {
+    sign = true
+    repositoryUrl = 'http://localhost:8081/repository/maven-releases/'
+    snapshotRepositoryUrl = 'http://localhost:8081/repository/maven-snapshots/'
 }
