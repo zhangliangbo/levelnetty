@@ -7,12 +7,26 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import org.apache.commons.cli.*;
 
 import java.nio.ByteOrder;
 
 public class LengthFieldClient {
-    public static void main(String[] args) throws InterruptedException {
-        String[] keys = new String[]{};
+    public static void main(String[] args) throws InterruptedException, ParseException {
+        String[] keys = new String[]{"help", "h", "p", "o", "l", "a", "s"};
+        Options options = new Options()
+                .addOption(Option.builder(keys[0]).desc("help").build())
+                .addOption(Option.builder(keys[1]).hasArg().desc("host").build())
+                .addOption(Option.builder(keys[2]).hasArg().desc("port").build())
+                .addOption(Option.builder(keys[3]).hasArg().desc("offset").build())
+                .addOption(Option.builder(keys[4]).hasArg().desc("length").build())
+                .addOption(Option.builder(keys[5]).hasArg().desc("adjustment").build())
+                .addOption(Option.builder(keys[6]).hasArg().desc("strip").build());
+        CommandLine cli = new DefaultParser().parse(options, args);
+        if (cli.hasOption(keys[0])) {
+            System.err.println(options);
+            return;
+        }
         final String host = "192.168.24.101";
         final int port = 9000;
         final NioEventLoopGroup group = new NioEventLoopGroup();
