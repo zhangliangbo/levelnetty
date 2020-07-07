@@ -22,7 +22,7 @@ public class LengthFieldClient {
         final String host = "192.168.24.101";
         final int port = 9000;
         NettyTcp.lengthField(host, port, 6, 4, 0, 10)
-                .blockingSubscribe(new DisposableSubscriber<byte[]>() {
+                .subscribe(new DisposableSubscriber<byte[]>() {
                     @Override
                     protected void onStart() {
                         System.err.println("subscribe");
@@ -45,5 +45,6 @@ public class LengthFieldClient {
                         System.err.println("complete");
                     }
                 });
+        System.err.println("=================");
     }
 }

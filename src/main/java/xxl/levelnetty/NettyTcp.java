@@ -11,6 +11,7 @@ import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
 
 import java.nio.ByteOrder;
+import java.util.Arrays;
 
 /**
  * 各种tcp数据源
@@ -90,6 +91,6 @@ public class NettyTcp {
                         group.shutdownGracefully();
                         emitter.onComplete();
                     });
-        }, BackpressureStrategy.LATEST);
+        }, BackpressureStrategy.BUFFER);
     }
 }
