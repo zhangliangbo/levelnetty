@@ -12,7 +12,7 @@ sourceCompatibility = "8"
 targetCompatibility = "8"
 
 repositories {
-    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
     mavenCentral()
     maven {
         url 'http://localhost:8081/repository/maven-snapshots/'
@@ -27,6 +27,7 @@ dependencies {
     implementation group: 'io.netty', name: 'netty-all', version: '4.1.50.Final'
     implementation group: 'commons-cli', name: 'commons-cli', version: '1.4'
     implementation group: 'io.vavr', name: 'vavr', version: '0.10.3'
+    implementation group: 'io.reactivex.rxjava3', name: 'rxjava', version: '3.0.4'
     //just use in test to study grammar
     testImplementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.4'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
@@ -35,7 +36,7 @@ dependencies {
 shadowJar {
     zip64 true
     manifest {
-        attributes(['Main-Class': 'xxl.levelnetty.RawClient'])
+        attributes(['Main-Class': 'xxl.levelnetty.LengthFieldClient'])
     }
 }
 
