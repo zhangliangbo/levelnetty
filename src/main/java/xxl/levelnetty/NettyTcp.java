@@ -19,12 +19,12 @@ public class NettyTcp {
     /**
      * 带长度字段的编解码
      *
-     * @param host
-     * @param port
-     * @param offset
-     * @param length
-     * @param adjustment
-     * @param strip
+     * @param host 域名
+     * @param port  端口
+     * @param offset 移位
+     * @param length 长度
+     * @param adjustment 长度微调
+     * @param strip 跳跃
      * @return
      */
     public static Flowable<byte[]> lengthField(String host, int port, int offset, int length, int adjustment, int strip) {
