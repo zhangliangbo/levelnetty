@@ -25,15 +25,18 @@ repositories {
 
 dependencies {
     implementation group: 'io.netty', name: 'netty-all', version: '4.1.65.Final'
-    //just use in test to study grammar
-    testImplementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.4'
+    implementation "org.slf4j:slf4j-api:1.7.29"
+    implementation "ch.qos.logback:logback-classic:1.2.3"
+    implementation "net.logstash.logback:logstash-logback-encoder:6.4"
+    compileOnly 'org.projectlombok:lombok:1.18.18'
+    annotationProcessor 'org.projectlombok:lombok:1.18.18'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
 shadowJar {
     zip64 true
     manifest {
-        attributes(['Main-Class': 'xxl.levelnetty.LengthFieldClient'])
+        attributes(['Main-Class': 'xxl.levelnetty.Main'])
     }
 }
 
