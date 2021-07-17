@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  **/
 
 @Slf4j
-public class HttpServer {
+public class NettyHttpServer {
     public static void main(String[] args) {
         EventLoopGroup boss = new NioEventLoopGroup(1, new DefaultThreadFactory("boss"));
         EventLoopGroup worker = new NioEventLoopGroup(new DefaultThreadFactory("worker"));

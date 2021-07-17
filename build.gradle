@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'io.netty', name: 'netty-all', version: '4.1.65.Final'
+//    implementation group: 'io.netty', name: 'netty-all', version: '4.1.65.Final'
     implementation group: 'io.projectreactor.netty', name: 'reactor-netty', version: '1.0.9'
     implementation "org.slf4j:slf4j-api:1.7.29"
     implementation "ch.qos.logback:logback-classic:1.2.3"
