@@ -19,28 +19,20 @@ import lombok.extern.slf4j.Slf4j;
  **/
 
 @Slf4j
-public class NettyHttpServer {
+public class NettyServer {
     public static void main(String[] args) {
         EventLoopGroup boss = new NioEventLoopGroup(1, new DefaultThreadFactory("boss"));
-        EventLoopGroup worker = new NioEventLoopGroup(new DefaultThreadFactory("worker"));
+        EventLoopGroup worker = new NioEventLoopGroup(2, new DefaultThreadFactory("worker"));
         EventLoopGroup handler = new DefaultEventLoopGroup(new DefaultThreadFactory("handler"));
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         try {
             serverBootstrap.group(boss, worker);
             serverBootstrap.channel(NioServerSocketChannel.class);
             serverBootstrap.localAddress(5555);
+            serverBootstrap.option(ChannelOption.SO_BACKLOG, 128);
             serverBootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
             serverBootstrap.handler(new LoggingHandler(LogLevel.DEBUG));
-            serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                protected void initChannel(SocketChannel ch) throws Exception {
-                    ChannelPipeline pipeline = ch.pipeline();
-                    pipeline.addLast(handler,
-                            new HttpServerCodec(),
-                            new HttpObjectAggregator(512 * 1024),
-                            new HttpRequestHandler());
-                }
-            });
+            serverBootstrap.childHandler(new NettyTcpHandler(handler));
             ChannelFuture bindFuture = serverBootstrap.bind().sync();
             log.info("服务已绑定");
             ChannelFuture closeFuture = bindFuture.channel().closeFuture();
