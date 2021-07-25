@@ -19,7 +19,13 @@ public class TcpRequestHandler extends SimpleChannelInboundHandler<ByteBuf> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
         log.info("收到 {}", msg.toString(StandardCharsets.UTF_8));
-        Thread.sleep(1000);
-        ctx.writeAndFlush(Unpooled.wrappedBuffer("get.".getBytes()));
+        ctx.executor().execute(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            ctx.writeAndFlush(Unpooled.wrappedBuffer("get.".getBytes()));
+        });
     }
 }
