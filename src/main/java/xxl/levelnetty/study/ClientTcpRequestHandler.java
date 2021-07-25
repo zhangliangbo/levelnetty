@@ -20,7 +20,7 @@ public class ClientTcpRequestHandler extends SimpleChannelInboundHandler<ByteBuf
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.executor().scheduleAtFixedRate(() -> ctx.writeAndFlush(Unpooled.wrappedBuffer("hello.".getBytes())), 1, 1, TimeUnit.SECONDS);
+        ctx.executor().scheduleAtFixedRate(() -> ctx.writeAndFlush(Unpooled.wrappedBuffer("hello.".getBytes())), 1, 5, TimeUnit.SECONDS);
         super.channelActive(ctx);
     }
 
