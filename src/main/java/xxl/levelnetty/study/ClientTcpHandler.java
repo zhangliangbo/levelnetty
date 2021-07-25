@@ -12,25 +12,25 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author zhangliangbo
- * @since 2021/7/24
+ * @since 2021/7/25
  **/
 
 @Slf4j
-public class NettyTcpHandler extends ChannelInitializer<SocketChannel> {
+public class ClientTcpHandler extends ChannelInitializer<SocketChannel> {
 
     private EventExecutorGroup handler;
 
-    public NettyTcpHandler(EventExecutorGroup handler) {
+    public ClientTcpHandler(EventExecutorGroup handler) {
         this.handler = handler;
     }
 
     @Override
-    protected void initChannel(SocketChannel ch) {
+    protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
         pipeline.addLast(handler,
                 new LoggingHandler(LogLevel.DEBUG),
                 new DelimiterBasedFrameDecoder(1024, Unpooled.wrappedBuffer(".".getBytes())),
-                new TcpRequestHandler());
+                new ClientTcpRequestHandler());
     }
 
 }
