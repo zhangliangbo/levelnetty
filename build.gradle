@@ -25,12 +25,12 @@ repositories {
 
 dependencies {
 //    implementation group: 'io.netty', name: 'netty-all', version: '4.1.65.Final'
-    implementation group: 'io.projectreactor.netty', name: 'reactor-netty', version: '1.0.9'
-    implementation "org.slf4j:slf4j-api:1.7.29"
-    implementation "ch.qos.logback:logback-classic:1.2.3"
-    implementation "net.logstash.logback:logstash-logback-encoder:6.4"
-    compileOnly 'org.projectlombok:lombok:1.18.18'
-    annotationProcessor 'org.projectlombok:lombok:1.18.18'
+    implementation group: 'io.projectreactor.netty', name: 'reactor-netty', version: '1.0.20'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'ch.qos.logback:logback-classic:1.2.11'
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.2'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
